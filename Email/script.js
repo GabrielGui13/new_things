@@ -1,12 +1,26 @@
 const nodemailer = require('nodemailer')
+const bodyParser = require('body-parser')
+const path = require('path')
+const express = require('express')
+const app = express()
+const port = 3000
 
-function main() {
-    let name = document.getElementById('name').value
-    let mailto = document.getElementById('emailto').value
-    let subject = document.getElementById('subject').value
-    let message = document.getElementById('message').value
+app.use(bodyParser.urlencoded({extended: true}))
 
-    console.log(name, mailto, subject, message)
+//set public folder to put archives
+app.use('/public', express.static(path.join(__dirname, 'public')))
+
+app.get('/', (req, res) => {
+    res.sendFile('main.html', {
+        root: path.join(__dirname, './')
+    })
+})
+
+app.post('/send', (req, res) => {
+    let name = req.body.nome
+    let mailto = req.body.emailto
+    let subject = req.body.subject
+    let message = req.body.message
 
     let transporter = nodemailer.createTransport({ //conectar na conta do transporte
         host: 'smtp.gmail.com',
@@ -20,13 +34,13 @@ function main() {
             rejectUnauthorized: false
         }
     })
-    
+
     async function sendMail() {
         const info = await transporter.sendMail({
-            from: `${name} <${mailto}>`,
-            to: [mailto, 'gabrielguilherme13@hotmail.com'],
+            from: `Gabriel Gostoso <gabrielgostosotestes@gmail.com>`,
+            to: [mailto],
             subject: subject,
-            html: `<h1> ${message} </h1> <img src="cid:inception">`,
+            html: `<h1> Olá ${name}! \n${message} </h1> <img src="cid:inception">`,
             attachments: [{
                 filename: 'inception.png',
                 path: __dirname + '/inception.png',
@@ -34,15 +48,14 @@ function main() {
             }]
         })
         console.log(info.messageId)
-        alert(info.messageId)
+        res.send(`<script>alert('Email enviado! ${info.messageId}')</script>`)
+
+        window.history.back()
+        window.location.reload()
     }
-    //sendMail()    
-}
+    sendMail()
+})
 
-function load() {
-    var btn = document.getElementById("btn");
-    btn.addEventListener("click", getInfo);
-}
-window.addEventListener("load", load)
-
-load()
+app.listen(port, () => {
+    console.log(`Servidor online na porta ${port}!`)
+})
