@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(#00417a, #620c99, #d800ff);
+    display: flex;
+}
+
+.content {
+    background-color: whitesmoke;
+    padding: 30px;
+    margin: auto;
+    height: 60%;
+    width: 25%;
+    box-shadow: black 5px 10px 40px;
+    overflow: hidden;
+}
+
+fieldset {
+    width: 100%;
+    height: 4rem;
+}
+
+fieldset:nth-of-type(4) {
+    height: 11rem;
+}
+
+legend {
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+input[type=text], input[type=password], textarea {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    resize: none;
+    width: 60%;
+    height: 70%;
+}
+
+textarea {
+    height: 85%;
+}
+
+#btn {
+    margin: auto;
+    padding: 5px;
+    border-radius: 5px;
+    resize: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    cursor: pointer;
+    background-color: white;
+}
