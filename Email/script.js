@@ -48,10 +48,18 @@ app.post('/send', (req, res) => {
             }]
         })
         console.log(info.messageId)
-        res.send(`<script>alert('Email enviado! ${info.messageId}')</script>`)
-
-        window.history.back()
-        window.location.reload()
+        res.send(
+            `   <script>alert('Email enviado! ${info.messageId}')</script>
+                <a href='/'>Voltar</a>
+                <style>
+                    a {
+                        text-align: center;
+                        font-size: 30px;
+                        border: 1px solid black;
+                    }
+                </style>
+            `
+        )
     }
     sendMail()
 })
