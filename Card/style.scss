@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(#790e31, #120946);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .card {
+        height: 280px;
+        width: 550px;
+        background-color: white;
+        color: #000;
+        padding: 3px;
+        display: flex;
+
+        img {
+            height: 100%;
+            padding: 5px;
+            border: 2px solid black;
+        }
+
+        .price {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h2 {
+                margin-top: 5px;
+            }
+
+            p {
+                border-top: 1px solid black;
+                font-size: 15px;
+            }
+
+            h1 {
+                margin-top: 50px;
+                border-bottom: 2px solid black;
+                padding: 3px;
+            }
+
+            button {
+                margin-top: 40px;
+                font-size: 15px;
+                font-weight: 700;
+                padding: 15px;
+                background-color: black;
+                color: white;
+                outline: none;
+                border-radius: 30px;
+            }
+
+        }
+        
+    }
+}
+
