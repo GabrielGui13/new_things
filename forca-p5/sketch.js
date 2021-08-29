@@ -204,7 +204,7 @@ function game() {
 function setup() {
   preload()
   createCanvas(canvasWidth, canvasHeight);
-  volumeSlider = createSlider(0, 1, 0.0, 0.1); //trocar volume depois
+  volumeSlider = createSlider(0, 1, 0.4, 0.1);
   volumeSlider.position(canvasWidth - 180, 10);
   sortearPalavra();
   playMusic();
