@@ -1,0 +1,126 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: 'Questrial', sans-serif;
+}
+
+form {
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    margin: 10px 0;
+    border: none;
+}
+
+button {
+    width: 160px;
+    height: 45px;
+    align-self: center;
+    border-radius: 0;
+    background: none;
+    border: 3px #c3ff5b solid;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 25px;
+}
+
+button:hover {
+    background: #c3ff5b;
+}
+
+.container {
+    margin-bottom: 120px;
+}
+
+.result {
+    display: none;
+    flex-direction: column;
+    width: 40vw;
+    margin: 20px auto;
+}
+
+.result div i + span {
+    background: #c3ff5b;
+    display: inline-block;
+    padding: 1px;
+}
+
+.inputLabel {
+	margin: 2px;
+}
+
+.inputDiv {
+	display: flex;
+	margin: 10px;
+	height: 20px;
+}
+
+/* Customize the label (the inputLabel) */
+.inputLabel {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.inputLabel input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.inputLabel:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add colored background */
+.inputLabel:nth-child(5) input:checked ~ .checkmark {
+  background-color: rgb(255, 2, 2);
+}
+
+.inputLabel:nth-child(4) input:checked ~ .checkmark {
+  background-color: rgb(207, 3, 3);
+}
+
+.inputLabel:nth-child(3) input:checked ~ .checkmark {
+  background-color: gray;
+}
+
+.inputLabel:nth-child(2) input:checked ~ .checkmark {
+  background-color: green;
+}
+
+.inputLabel:nth-child(1) input:checked ~ .checkmark {
+  background-color: rgb(0, 185, 0);
+}
