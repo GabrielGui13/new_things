@@ -2,13 +2,13 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-    font-family: 'Questrial', sans-serif;
+  font-family: 'Questrial', sans-serif;
 }
 
 form {
 	width: 100%;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 fieldset {
@@ -16,43 +16,43 @@ fieldset {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    margin: 10px 0;
-    border: none;
+  margin: 10px 0;
+  border: none;
 }
 
 button {
-    width: 160px;
-    height: 45px;
-    align-self: center;
-    border-radius: 0;
-    background: none;
-    border: 3px #c3ff5b solid;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 25px;
+  width: 160px;
+  height: 45px;
+  align-self: center;
+  border-radius: 0;
+  background: none;
+  border: 3px #c3ff5b solid;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 25px;
 }
 
 button:hover {
-    background: #c3ff5b;
+  background: #c3ff5b;
 }
 
 .container {
-    margin-bottom: 120px;
+  margin-bottom: 120px;
 }
 
 .result {
-    display: none;
-    flex-direction: column;
-    width: 40vw;
-    margin: 20px auto;
+  display: none;
+  flex-direction: column;
+  width: 40vw;
+  margin: 20px auto;
 }
 
 .result div i + span {
-    background: #c3ff5b;
-    display: inline-block;
-    padding: 1px;
+  background: #c3ff5b;
+  display: inline-block;
+  padding: 1px;
 }
 
 .inputLabel {

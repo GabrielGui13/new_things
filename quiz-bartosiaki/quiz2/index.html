@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Quiz 2</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <form name="quiz">
+            <div class="areasdiv">
+                <p>I. Selecione as áreas nas quais você sente que tem mais talento, habilidade ou treinamento que uma
+                    pessoa normal.</p>
+                <br>    
+                <input type="checkbox" name="areas" value="artes">
+                <label for="">Artes visuais (pintura, escultura)</label>
+                <br>
+                <input type="checkbox" name="areas" value="musica">
+                <label for="">Música</label>
+                <br>
+                <input type="checkbox" name="areas" value="danca">
+                <label for="">Dança</label>
+                <br>
+                <input type="checkbox" name="areas" value="arquitetura">
+                <label for="">Projeto arquitetônico</label>
+                <br>
+                <input type="checkbox" name="areas" value="invencoes">
+                <label for="">Invenções</label>
+                <br>
+                <input type="checkbox" name="areas" value="escrita">
+                <label for="">Escrita criativa</label>
+                <br>
+                <input type="checkbox" name="areas" value="humor">
+                <label for="">Humor</label>
+                <br>
+                <input type="checkbox" name="areas" value="ciencia">
+                <label for="">Investigação científica</label>
+                <br>
+                <input type="checkbox" name="areas" value="teatro-cinema">
+                <label for="">Teatro e cinema</label>
+                <br>
+                <input type="checkbox" name="areas" value="culinaria">
+                <label for="">Artes culinárias</label>
+                <br> <br>
+            </div>
+
+            <div class="insert-questions">
+                <p>II. Selecione as sentenças que se aplicam a você. Ao lado das frases com um asterisco (*), escreva
+                    quantas vezes essa frase se aplica a você.</p>
+                <br>
+
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+        <div class="result" style="display: none">
+            <strong>Resultado: </strong>
+            <span name="dominio"></span>
+            <br>
+            <strong>Pontuação total: </strong>
+            <span name="total"></span>
+            <p name="info"></p>
+        </div>
+        <button type="submit" name="reiniciar" style="display: none">Reiniciar</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
