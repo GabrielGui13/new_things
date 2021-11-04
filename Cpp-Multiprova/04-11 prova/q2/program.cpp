@@ -3,23 +3,22 @@
 using namespace std;
 
 int main() {
-    int num, aux;
+    int n, x, impar;
+    impar = 0;
+    cin >> n;
 
-    aux = 0;
-    cin >> num;
+    while (n != 0) {
+        x = n % 10;
+        n = n / 10;
 
-    while (aux == 0) {
-        if (num == 1) {
-            cout << "Digitos nao pares" << endl;
-            aux = 1;
+        if (x % 2 == 1) {
+            impar = 1;
+            n == 0;
         }
-        else if (num == 0) {
-            cout << "Digitos pares" << endl;
-            aux = 1;
-        }
-
-        num -= 2;
     }
-    
+
+    if (impar == 0) cout << "Digitos pares" << endl;
+    else cout << "Digitos nao pares" << endl;
+
     return 0;
 }
