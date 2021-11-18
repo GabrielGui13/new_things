@@ -2,6 +2,7 @@
 
 using namespace std;
 
+//o int antes da funcao significa que ela sempre vai retornar um numero inteiro
 int maximo(int n1, int n2, int n3) { //criacao da funcao que recebe 3 parametros, 3 inteiros, que representam a entrada do usuario
     int maior = n1; //criacao de uma variavel maior, nela eha tribuida inicialmente um dos numeros para usar como base pras comparacoes
 
