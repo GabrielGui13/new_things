@@ -38,9 +38,9 @@ void simularVenda(float preco) {
 
     calcularOpcoesVenda(preco, vista, valorParcela, totalParcelado); //chama a funcao para calcular as opcoes de venda
 
-    cout << "Preco: " << setprecision(5) << preco << endl; //imprime cada valor com um numero preciso de 0s, usando setprecision, funcao derivada do #include<iomanip>
-    cout << "Preco a vista: " << setprecision(4) << vista << endl;
-    cout << "Valor parcela: " << setprecision(3) << valorParcela << endl;
-    cout << "Total parcelado: " << setprecision(4) << totalParcelado << endl;
-    cout << "Juros: " << setprecision(4) << preco * 0.1 << endl; //o juros eh 10% do valor
+    cout << "Preco: " << (double) preco << endl; //imprime cada valor com um numero preciso de 0s, usando setprecision, funcao derivada do #include<iomanip>
+    cout << "Preco a vista: " << (double) vista << endl;
+    cout << "Valor parcela: " << (double) valorParcela << endl;
+    cout << "Total parcelado: " << (double) totalParcelado << endl;
+    cout << "Juros: " << (double) preco * 0.1 << endl; //o juros eh 10% do valor
 }
