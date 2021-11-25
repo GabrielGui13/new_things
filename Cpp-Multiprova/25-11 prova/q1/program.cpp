@@ -7,6 +7,8 @@ int main() {
     cin >> n; //recebe o valor da variavel
     float array[n]; //inicializa 
 
+    if (n < 0 || n > 30) return 0; //se o valor estiver fora do intervalo 0 - 30, o programa encerra
+
     for (int i = 0; i < n; i++) { //cria um for com a quantidade de itens do array, e coloca um valor para cada um (valor que vem da entrada do usuario)
         cin >> array[i];
     }
