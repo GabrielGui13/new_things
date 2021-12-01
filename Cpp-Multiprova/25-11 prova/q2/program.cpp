@@ -11,7 +11,7 @@ int main() {
         cin >> array[i];
     }
 
-    int venda, cont; //inicializa a variavel do valor para comparacao de vendas, e o contador de quantas vendas
+    int venda, cont = 0; //inicializa a variavel do valor para comparacao de vendas, e o contador de quantas vendas
     cin >> venda; //recebe o valor da venda
 
     for (int y = 0; y < n; y++) { //percorre o array e checa quantas vendas houveram (valores iguais a variavel "venda")
