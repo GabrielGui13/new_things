@@ -19,6 +19,8 @@ int main() {
         frase[i] = B[j]; //laco for para adicionar o restante dos caracteres da segunda frase (um por um) no restante da frase
     }
 
+    frase[tamA + tamB + 1] = '\0' //finalizador da frase
+
     int count = 0; //contador de espacos
     for (int i = 0; i < tamA + tamB + 1; i++) {
         if (frase[i] == ' ') count++; //checa cada caractere da frase completa um por um e procura por caracteres de espaco: " ", pois representa o fim de uma palavra
