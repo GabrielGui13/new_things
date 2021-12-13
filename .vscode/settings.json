@@ -5,6 +5,7 @@
         "iomanip": "cpp",
         "ostream": "cpp",
         "random": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "cstddef": "cpp"
     }
 }
