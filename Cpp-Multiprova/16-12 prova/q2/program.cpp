@@ -25,3 +25,23 @@ int main() {
 
     return 0;
 }
+
+/* 
+    O programa pede que receba um vetor normal, definido por uma variavel que determina seu tamanho, e a partir disso, deve "rotacionar" o vetor,
+    simular como se os numeros passassem para a direita, com isso no primeiro vetor, o numero da posicao 1 ficaria na posicao 2, o numero da posicao 
+    dois ficaria na 3, e assim em diante.
+
+    A primeira coisa a fazer eh receber qual o tamanho do primeiro vetor, que eh armazenado na variavel "n", ao receber o
+    valor dessa variavel, o primeiro vetor chamado "vetorInicial" eh inicializado, e apos isso eh criado um laco for para receber o valor
+    de cada elemento do vetor, depois disse, o segundo vetor chamado "vetorFinal" eh criado com o mesmo tamanho do primeiro vetor, ja que
+    apenas a ordem vai mudar.
+
+    Apos os vetores estarem criados, o primeiro elemento do vetorFinal eh definido como o ultimo elemento do vetorInicial, ja que seria como se ele
+    tivesse "passado pra direita", e assim volta pro inicio, o "n - 1" representa que eh o tamanho do vetor menos uma unidade, ja que os vetores sempre 
+    comecam com 0.
+
+    Apos o primeiro elemento estar definido, um laco for eh criado para colocar o restante dos elementos do vetorInicial no vetorFinal, mas uma posicao a frente, 
+    por isso que o indice do vetorFinal eh n + 1, pois eh a posicao do outro vetor mais uma unidade a frente, alem disso, o for vai ate o numero n - 1, para que nao de 
+    conflito na atribuicao dos valores, e tambem por causa disso que o primeiro elemento foi definido antes, apos tudo isso o vetor novo com a "rotacao para a direita"
+    eh mostrado na tela
+ */
