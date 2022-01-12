@@ -5,6 +5,7 @@ using namespace std;
 const int MAX = 10;
 
 void receberMatriz(int mx[][MAX], int nl, int nc);
+void maiorNumeroDaColuna(int mx[][MAX], int nl, int nc);
 
 int main() {
     int l, c;
@@ -14,17 +15,21 @@ int main() {
     if (l > 10 || c > 10) return 0;
 
     receberMatriz(m, l, c);
+    maiorNumeroDaColuna(m, l, c);
 
-    for (int i = 0; i < c; i++) {
+    return 0;
+}
+
+void maiorNumeroDaColuna(int mx[][MAX], int nl, int nc) {
+    for (int i = 0; i < nc; i++) {
         int maior = 0;
 
-        for (int j = 0; j < l; j++) {
-            if (m[j][i] > maior) maior = m[j][i];
+        for (int j = 0; j < nl; j++) {
+            if (mx[j][i] > maior)
+                maior = mx[j][i];
         }
         cout << maior << " ";
     }
-
-    return 0;
 }
 
 void receberMatriz(int mx[][MAX], int nl, int nc) {
