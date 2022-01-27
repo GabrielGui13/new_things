@@ -7,17 +7,20 @@ export class UsersService {
         {
             id: 1,
             name: 'Gabriel Guilherme',
-            email: 'gabriel@teste.com'
+            email: 'gabriel@teste.com',
+            password: '123'
         },
         {
             id: 2,
             name: 'Gabriel Pereira',
-            email: 'pereira@teste.com'
+            email: 'pereira@teste.com',
+            password: '1234'
         },
         {
             id: 3,
             name: 'Gabriel Fontineli',
-            email: 'fonti@teste.com'
+            email: 'fonti@teste.com',
+            password: '12345'
         },
     ];
 
@@ -27,6 +30,10 @@ export class UsersService {
 
     findById(id: number): User {
         return this.data.find((value) => value.id === id);
+    }
+    
+    findByEmail(email: string): User {
+        return this.data.find((value) => value.email === email);
     }
 
     create(user: User): User {
