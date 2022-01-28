@@ -6,5 +6,6 @@ import { Module } from '@nestjs/common';
   imports: [],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService] //need to export to make it global usable
 })
 export class UsersModule {}
