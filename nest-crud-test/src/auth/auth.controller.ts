@@ -1,6 +1,6 @@
 import { Controller, UseGuards, Request, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local-auth.guard';
+import { LocalAuthGuard } from './shared/local-auth.guard';
 
 @Controller()
 export class AuthController {
@@ -33,5 +33,5 @@ para chamar o método validateUser do nosso AuthService
 - Caso o token nao esteja valido ou esteja expirado, ele retorna um erro 401 Unauthorized
 - Caso o token seja valido, a aplicacao segue o curso normal
 - Nessa api, sempre que o token expirar (60s), precisamos ir em auth/login, gerar o access_token (token), 
-e colocar manualmente nos headers com Bearer tokem, para validar a autenticacao
+e colocar manualmente nos headers com Bearer token, para validar a autenticacao
 */

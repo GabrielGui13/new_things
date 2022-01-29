@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './user';
+import { PrismaService } from 'src/database/prisma.service';
+//import { User } from './user';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-    private data: User[] = [
+/*     private data: User[] = [
         {
             id: 1,
             name: 'Gabriel Guilherme',
@@ -22,35 +24,46 @@ export class UsersService {
             email: 'fonti@teste.com',
             password: '12345'
         },
-    ];
+    ]; */
 
-    findAll(): User[] {
-        return this.data;
+    constructor(
+        private prisma: PrismaService
+    ) {}
+
+    findAll(): any {
+        /* return this.data; */
+        return this.prisma.user.findMany();
     }
 
     findById(id: number): User {
-        return this.data.find((value) => value.id === id);
+        //return this.data.find((value) => value.id === id);
     }
     
     findByEmail(email: string): User {
-        return this.data.find((value) => value.email === email);
+        //return this.data.find((value) => value.email === email);
     }
 
-    create(user: User): User {
-        user.id = this.data[this.data.length - 1].id + 1
-        this.data.push(user);
-        return user;
+    async create(user: User): Promise<any> {
+        /* user.id = this.data[this.data.length - 1].id + 1
+        this.data.push(user); */
+        const createdUser = await this.prisma.user.create({
+            data: {
+                ...user
+            }
+        })
+
+        return createdUser;
     }
 
     update(id: number, user: User): User | { error: String; } {
-        const prevUser = this.data.find((value) => value.id == id);
+/*         const prevUser = this.data.find((value) => value.id == id);
 
         if (prevUser) {
             prevUser.name = user.name;
             prevUser.email = user.email;
 
             return user;
-        }
+        } */
 
         return {
             error: 'User does not exist'
@@ -58,7 +71,7 @@ export class UsersService {
     }
 
     delete(id: number): void {
-        const user = this.data.find(value => value.id == id);
-        this.data.splice(this.data.indexOf(user), 1);
+        //const user = this.data.find(value => value.id == id);
+        //this.data.splice(this.data.indexOf(user), 1);
     }
 }
