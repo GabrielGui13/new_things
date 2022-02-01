@@ -1,7 +1,7 @@
 import { UsersService } from './users.service';
 //import { User } from './user';
 import { User } from '@prisma/client';
-import { Controller, Get, Param, Post, Put, Body, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Put, Body, Delete, UseGuards, NotFoundException } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/shared/jwt-auth.guard';
 
 @Controller('users')
@@ -10,16 +10,16 @@ export class UsersController {
         private usersService: UsersService
     ) {}
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get()
     async findAll(): Promise<User[]> {
         return this.usersService.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
+    //@UseGuards(JwtAuthGuard)
     @Get(':id')
-    async findById(@Param('id') id: number): Promise<User> {
-        return this.usersService.findById(id);
+    async findById(@Param('id') id: string): Promise<User> {
+        return this.usersService.findById(parseInt(id));
     }
 
     @Post()
@@ -28,12 +28,12 @@ export class UsersController {
     }
 
     @Put(':id')
-    async update(@Body() user: User, @Param('id') id: number): Promise<User | {error: String}> {
-        return this.usersService.update(id, user);
+    async update(@Body() user: User, @Param('id') id: string): Promise<User | {error: String}> {
+        return this.usersService.update(parseInt(id), user);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: number): Promise<void> {
-        this.usersService.delete(id);
+    async delete(@Param('id') id: string): Promise<void> {
+        this.usersService.delete(parseInt(id));
     }
 }

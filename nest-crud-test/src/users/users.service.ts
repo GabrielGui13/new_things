@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 //import { User } from './user';
 import { User } from '@prisma/client';
@@ -30,20 +30,37 @@ export class UsersService {
         private prisma: PrismaService
     ) {}
 
-    findAll(): any {
+    async findAll(): Promise<User[]> {
         /* return this.data; */
-        return this.prisma.user.findMany();
+        return await this.prisma.user.findMany();
     }
 
-    findById(id: number): User {
+    async findById(id: number): Promise<User> {
         //return this.data.find((value) => value.id === id);
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        })
+
+        if (!user) throw new NotFoundException();
+
+        return user;
     }
     
-    findByEmail(email: string): User {
-        //return this.data.find((value) => value.email === email);
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                email: email
+            }
+        })
+
+        if (!user) throw new NotFoundException();
+
+        return user;
     }
 
-    async create(user: User): Promise<any> {
+    async create(user: User): Promise<User> {
         /* user.id = this.data[this.data.length - 1].id + 1
         this.data.push(user); */
         const createdUser = await this.prisma.user.create({
@@ -55,8 +72,8 @@ export class UsersService {
         return createdUser;
     }
 
-    update(id: number, user: User): User | { error: String; } {
-/*         const prevUser = this.data.find((value) => value.id == id);
+    async update(id: number, user: User): Promise<User> {
+        /* const prevUser = this.data.find((value) => value.id == id);
 
         if (prevUser) {
             prevUser.name = user.name;
@@ -64,14 +81,43 @@ export class UsersService {
 
             return user;
         } */
+        const findUser = await this.prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        })
 
-        return {
-            error: 'User does not exist'
-        }
+        if (!findUser) throw new NotFoundException();
+
+        const updatedUser = await this.prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                ...user
+            }
+        })
+        
+        return updatedUser;
     }
 
-    delete(id: number): void {
+    async delete(id: number): Promise<User> {
         //const user = this.data.find(value => value.id == id);
         //this.data.splice(this.data.indexOf(user), 1);
+        const findUser = await this.prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        })
+
+        if (!findUser) throw new NotFoundException();
+
+        const user = await this.prisma.user.delete({
+            where: {
+                id: id
+            }
+        })
+
+        return user;
     }
 }
