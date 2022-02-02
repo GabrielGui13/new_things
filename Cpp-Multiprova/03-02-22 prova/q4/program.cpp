@@ -26,6 +26,7 @@ void generoMaisFrequente(Genero v[], int tam, bool desc, Musica m[]);
 void listarGenero(Musica m[], Genero g[], int tam);
 void preencherGeneros(Genero g[], int tam);
 void copiarPlaylist(Musica p1[], Musica p2[], int tam);
+Musica primeiraAparicao(Musica p1[], int tam)
 
 int main() {
     int n;
@@ -121,9 +122,7 @@ void ord(Musica v[], int tam, bool desc) {
             if (desc) {
                 if (v[j + 1].vezesTocadas < v[j].vezesTocadas) {}
                 else if (v[j + 1].vezesTocadas == v[j].vezesTocadas) {
-                    if (strcmp(v[j + 1].artista, v[j].artista) < 0) {
-                        trocarMusicas(v, j, j + 1);
-                    } 
+                    continue;
                 }
                 else trocarMusicas(v, j, j + 1);
             }
