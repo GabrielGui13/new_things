@@ -64,7 +64,7 @@ int mostrarSoma(int v[], int tam, int s) {
     int soma = 0;
 
     for (int i = 0; i < tam; i++) {
-        if (soma + v[i + 1] > s && i + 1 < tam) break;
+        if (i + 1 == tam && soma + v[i] > s) break;
         soma += v[i];
     }
 
