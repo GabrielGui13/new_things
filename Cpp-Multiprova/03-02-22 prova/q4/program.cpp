@@ -120,10 +120,18 @@ void ord(Musica v[], int tam, bool desc) {
         for (int j = 0; j < tam - 1; j++) {
             if (desc) {
                 if (v[j + 1].vezesTocadas < v[j].vezesTocadas) {}
+                else if (v[j + 1].vezesTocadas == v[j].vezesTocadas) {
+                    if (strcmp(v[j + 1].artista, v[j].artista) < 0) {}
+                    else trocarMusicas(v, j, j + 1);
+                }
                 else trocarMusicas(v, j, j + 1);
             }
             else {
                 if (v[j + 1].vezesTocadas >= v[j].vezesTocadas) {}
+                else if (v[j + 1].vezesTocadas == v[j].vezesTocadas) {
+                    if (strcmp(v[j + 1].artista, v[j].artista) >= 0) {}
+                    else trocarMusicas(v, j, j + 1);
+                }
                 else trocarMusicas(v, j, j + 1);
             }
         }
