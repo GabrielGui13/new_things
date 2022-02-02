@@ -1,37 +1,51 @@
-#include<iostream>
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
-void recebeVetor(int v[], int tam);
+int recebeVetor(int v[]);
 void imprimeVetor(int v[], int tam);
 void trocarElementos(int v[], int p1, int p2);
 void ordenarElementos(int v[], int tam, bool desc);
-int mostrarSoma(int v[], int tam, int s);
+
+#define max 15
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    char ord[1];
+    cin >> ord;
+    bool desc = strcmp(ord, "d") == 0;
 
-    int numeros[n];
+    int numeros[max];
+    int tam = recebeVetor(numeros);
 
-    recebeVetor(numeros, n);
-    ordenarElementos(numeros, n, true);
+    ordenarElementos(numeros, tam, desc);
 
-    cout << "Soma " << mostrarSoma(numeros, n, m) << endl; 
+    imprimeVetor(numeros, tam);
 
     return 0;
 }
 
-void recebeVetor(int v[], int tam) {
+void imprimeVetor(int v[], int tam) {
     for (int i = 0; i < tam; i++) {
-        cin >> v[i];
+        cout << v[i] << ' ';
     }
 }
 
-void imprimeVetor(int v[], int tam) {
-    for (int i = 0; i < tam; i++) {
-        cout << v[i] << endl;
+int recebeVetor(int v[]) {
+    bool aux = true;
+    int count = 0;
+
+    while (aux) {
+        int n;
+        cin >> n;
+
+        if (n == 0) break;
+
+        v[count] = n;
+        count++;
     }
+
+    return count;
 }
 
 void trocarElementos(int v[], int p1, int p2) {
@@ -55,16 +69,4 @@ void ordenarElementos(int v[], int tam, bool desc) {
             }
         }
     }
-}
-
-int mostrarSoma(int v[], int tam, int s) {
-    int soma = 0;
-
-    for (int i = 0; i < tam; i++) {
-        if (i + 1 == tam && soma + v[i] > s) break;
-        if (soma + v[i + 1] > s && i + 1 != tam) break;
-        soma += v[i];
-    }
-
-    return soma;
 }
