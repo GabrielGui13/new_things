@@ -21,26 +21,35 @@ void recebeVetor(Musica v[], int tam);
 void imprimeVetor(Musica v[], int tam);
 void trocarMusicas(Musica v[], int p1, int p2);
 void trocarGeneros(Genero v[], int p1, int p2);
-void ordenarMusicas(Musica v[], int tam, bool desc);
-void generoMaisFrequente(Genero v[], int tam, bool desc);
+void ord(Musica v[], int tam, bool desc);
+void generoMaisFrequente(Genero v[], int tam, bool desc, Musica m[]);
 void listarGenero(Musica m[], Genero g[], int tam);
 void preencherGeneros(Genero g[], int tam);
+void copiarPlaylist(Musica p1[], Musica p2[], int tam);
 
 int main() {
     int n;
     cin >> n;
 
+    Musica playlistOriginal[n];
     Musica playlist[n];
     Genero generos[n];
 
     preencherGeneros(generos, n);
-    recebeVetor(playlist, n);
-    ordenarMusicas(playlist, n, true);
+    recebeVetor(playlistOriginal, n);
+    copiarPlaylist(playlist, playlistOriginal, n);
+    ord(playlist, n, true);
     imprimeVetor(playlist, n);
     listarGenero(playlist, generos, n);
-    generoMaisFrequente(generos, n, true);
+    generoMaisFrequente(generos, n, true, playlistOriginal);
 
     return 0;
+}
+
+void copiarPlaylist(Musica dest[], Musica src[], int tam) {
+    for (int i = 0; i < tam; i++) {
+        dest[i] = src[i];
+    }
 }
 
 void preencherGeneros(Genero g[], int tam) {
@@ -73,36 +82,21 @@ void listarGenero(Musica m[], Genero g[], int tam) {
 
     for (int i = 0; i < tam; i++) {
         for (int j = 0; j < tam; j++) {
-            cout << "\n" << m[i].genero << " == " << g[j].nome << " > " << strcmp(g[j].nome, m[i].genero) << endl;
+            char vazio[40];
+            strcpy(vazio, " ");
             
             if (strcmp(g[j].nome, m[i].genero) == 0) {
                 g[j].frequencia++;
                 break;
             }
-            else {
+            else if (strcmp(g[j].nome, vazio) == 0) {
                 strcpy(g[j].nome, m[i].genero);
                 g[j].frequencia++;
                 break;
             }
+            else continue;
         }
     }
-
-/*     for (int i = 0; i < tam; i++) {
-        char nomeGenero[40];
-        char vazio[40];
-        strcpy(nomeGenero, genero);
-        strcpy(vazio, " ");
-
-        if (strcmp(g[i].nome, nomeGenero) == 0) {
-            g[i].frequencia++;
-            break;
-        }
-        else {
-            strcpy(g[i].nome, nomeGenero);
-            g[i].frequencia++;
-            break;
-        }
-    } */
 }
 
 void trocarMusicas(Musica v[], int p1, int p2) {
@@ -121,7 +115,7 @@ void trocarGeneros(Genero v[], int p1, int p2) {
     v[p2] = aux;
 }
 
-void ordenarMusicas(Musica v[], int tam, bool desc) {
+void ord(Musica v[], int tam, bool desc) {
     for (int i = tam - 1; i >= 1; i--) {
         for (int j = 0; j < tam - 1; j++) {
             if (desc) {
@@ -136,7 +130,7 @@ void ordenarMusicas(Musica v[], int tam, bool desc) {
     }
 }
 
-void generoMaisFrequente(Genero v[], int tam, bool desc) {
+void generoMaisFrequente(Genero v[], int tam, bool desc, Musica m[]) {
     for (int i = tam - 1; i >= 1; i--) {
         for (int j = 0; j < tam - 1; j++) {
             if (desc) {
@@ -150,9 +144,6 @@ void generoMaisFrequente(Genero v[], int tam, bool desc) {
         }
     }
 
-    cout << endl;
-    for (int i = 0; i < tam; i++) {
-        cout << v[i].nome << " (" << v[i].frequencia << ")" << endl;
-    }
-    cout << "Genero mais frequente: " << v[0].nome << endl;
+    if (v[0].frequencia > v[1].frequencia) cout << "Genero mais frequente: " << v[0].nome << endl;
+    else cout << "Genero mais frequente: " << m[0].genero << endl;
 }
