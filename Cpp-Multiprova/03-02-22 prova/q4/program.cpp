@@ -26,7 +26,7 @@ void generoMaisFrequente(Genero v[], int tam, bool desc, Musica m[]);
 void listarGenero(Musica m[], Genero g[], int tam);
 void preencherGeneros(Genero g[], int tam);
 void copiarPlaylist(Musica p1[], Musica p2[], int tam);
-Musica primeiraAparicao(Musica p1[], int tam)
+Musica primeiraAparicao(Musica p1[], int tam);
 
 int main() {
     int n;
