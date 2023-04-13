@@ -1,0 +1,261 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+enum UserPlanStatus {
+  PENDENTE
+  ATRASADO
+  PAGO
+  CANCELADO
+  FINALIZADO
+}
+
+model Users {
+  id             String              @id @default(uuid())
+  external_id    String              @unique @default(uuid())
+  name           String
+  role           Role                @default(CUSTOMER)
+  email          String              @unique
+  password       String
+  phone          String?
+  cpf            String?
+  license_number String?
+  license_type   String?
+  projects       Projects[]
+  subscription   Subscription[]
+  payment        Payment[]
+  deleted        Boolean             @default(false)
+  created_at     DateTime            @default(now())
+  updated_at     DateTime            @updatedAt
+
+  @@map("users")
+}
+
+model Plans {
+  id                    String         @id @default(uuid())
+  external_id           String         @unique @default(uuid())
+  price_external_id     String         @default(uuid())
+  name                  String
+  value                 Float
+  duration_months       Int
+  subscription          Subscription[]
+  active                Boolean        @default(true)
+  public                Boolean        @default(true)
+  created_at            DateTime       @default(now())
+  updated_at            DateTime       @updatedAt
+
+  @@map("plans")
+}
+
+model Subscription {
+  id             String              @id @default(uuid())
+  external_id    String              @unique @default(uuid())
+  value          Float
+  user_id        String              
+  user           Users               @relation(fields: [user_id], references: [id])
+  plan_id        String
+  plan           Plans               @relation(fields: [plan_id], references: [id])
+  expiration     String?
+  plan_status    UserPlanStatus      @default(PENDENTE)
+  active         Boolean             @default(false)
+  completed      Boolean             @default(false)
+  payment        Payment[]
+  created_at     DateTime            @default(now())
+  updated_at     DateTime            @updatedAt
+
+  @@map("subscription")
+}
+
+model Payment {
+  id              String              @id @default(uuid())
+  external_id     String              @unique @default(uuid())
+  value           Float
+  user_id         String
+  user            Users               @relation(fields: [user_id], references: [id])
+  subscription_id String
+  subscription    Subscription        @relation(fields: [subscription_id], references: [id])
+  payment_date    DateTime?
+  completed       Boolean             @default(false)
+  created_at      DateTime            @default(now())
+  updated_at      DateTime            @updatedAt
+
+  @@map("payment")
+}
+
+model Projects {
+  id          String      @id @default(uuid())
+  name        String
+  description String
+  cep         String
+  address     String
+  city        String
+  state       String
+  district    String
+  complement  String
+  user_id     String
+  user        Users       @relation(fields: [user_id], references: [id])
+  norm_id     String
+  norm        Norm        @relation(fields: [norm_id], references: [id])
+  spdas       Spda[]
+  structures  Structure[]
+  calcs       Calc[]
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+
+  @@map("projects")
+}
+
+model Structure {
+  id         String   @id @default(uuid())
+  name       String
+  number     Int
+  height     Float
+  width      Float
+  project_id String
+  project    Projects @relation(fields: [project_id], references: [id])
+  calcs      Calc[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("structure")
+}
+
+model Spda {
+  id          String   @id @default(uuid())
+  description String
+  number      Int
+  type_id     String
+  type        SpdaType @relation(fields: [type_id], references: [id])
+  project_id  String
+  project     Projects @relation(fields: [project_id], references: [id])
+  calcs       Calc[]
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("spda")
+}
+
+model Standards {
+  id         String   @id @default(uuid())
+  name       String
+  version    Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("standards")
+}
+
+model SpdaType {
+  id         String   @id @default(uuid())
+  name       String
+  spdas      Spda[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("spda_type")
+}
+
+model DimensioningType {
+  id         String   @id @default(uuid())
+  name       String
+  calcs      Calc[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("dimensioning_type")
+}
+
+model Norm {
+  id              String         @id @default(uuid())
+  name            String
+  version         Float
+  active          Boolean
+  project_classes ProjectClass[]
+  Projects        Projects[]
+
+  @@map("norm")
+}
+
+model ProjectClass {
+  id            String @id @default(uuid())
+  name          String
+  norm_id       String
+  sphere_radius Float
+  norm          Norm   @relation(fields: [norm_id], references: [id])
+  calcs         Calc[]
+
+  @@map("project_class")
+}
+
+model Calc {
+  id                   String           @id @default(uuid())
+  spda_height          Float
+  margin               Float
+  explosive_atmosphere Boolean
+  ea_radius            Float
+  dpi                  Boolean
+  dpi_distance         Float
+  structure_distance   Float?
+  technical_report     String
+  spda_id              String
+  spda                 Spda             @relation(fields: [spda_id], references: [id])
+  structure_id         String
+  structure            Structure        @relation(fields: [structure_id], references: [id])
+  project_class_id     String
+  project_class        ProjectClass     @relation(fields: [project_class_id], references: [id])
+  project_class_radius Float
+  dimensioning_type_id String
+  dimensioning_type    DimensioningType @relation(fields: [dimensioning_type_id], references: [id])
+  project_id           String
+  project              Projects         @relation(fields: [project_id], references: [id])
+  calc_output_id       String?
+  calc_output          CalcOutput?
+  created_at           DateTime         @default(now())
+  updated_at           DateTime         @updatedAt
+  version              Int
+
+  @@map("calc")
+}
+
+model CalcOutput {
+  id                                  String  @id @default(uuid())
+  calc_id                             String  @unique
+  calc                                Calc    @relation(fields: [calc_id], references: [id], onDelete: Cascade)
+  spda_calculated_height              Float
+  protected_horizontal_distance       Float
+  ae_limit_height                     Float
+  ae_limit_horizontal_distance        Float
+  structure_limit_horizontal_distance Float? // Cobertura e Isolado
+  // Graph
+  dpc                                 Float?
+  hc_aux                              Float?
+  // Cobertura
+  fic_plan_radius                     Float?
+  fic_plan_height                     Float?
+  //Limites
+  margin_object                       Json?
+  hc_aux_object                       Json?
+  dp_object                           Json?
+  // Isolado
+  output_spda_height                  Float?
+  output_margin                       Float?
+  structure_limit_height              Float?
+  // Diagnóstico
+  diagnostic_message                  String?
+  diagnostic_is_valid                 Boolean @default(true)
+
+  @@map("calc_output")
+}
